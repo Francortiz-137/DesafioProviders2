@@ -1,11 +1,20 @@
 package cl.praxis.desafioproveedores2.service.impl;
 
+import cl.praxis.desafioproveedores2.dao.ProviderDAO;
+import cl.praxis.desafioproveedores2.dao.impl.ProviderDAOImpl;
 import cl.praxis.desafioproveedores2.models.ProviderDTO;
 import cl.praxis.desafioproveedores2.service.ProviderService;
 
 import java.util.List;
 
 public class ProviderServiceImpl implements ProviderService {
+
+    private final ProviderDAO dao;
+
+    public ProviderServiceImpl() {
+        dao = new ProviderDAOImpl();
+    }
+
     @Override
     public ProviderDTO selectProviderById(int id) {
         return null;
@@ -13,7 +22,7 @@ public class ProviderServiceImpl implements ProviderService {
 
     @Override
     public List<ProviderDTO> selectAllProviders() {
-        return List.of();
+        return dao.selectAllProviders();
     }
 
     @Override

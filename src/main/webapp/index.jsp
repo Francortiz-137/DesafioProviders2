@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +10,10 @@
 
 </head>
 <body>
-<h1>Proveedores</h1>
+<h1 class="text-center">Proveedores</h1>
 <br/>
 
-<section class="d-flex">
+<section class="container d-flex">
 
     <form method="post" action="proveedores">
         <div class="mb-3">
@@ -72,8 +73,12 @@
                 <td>${proveedor.contact}</td>
                 <td>${proveedor.contactPhone}</td>
                 <td>
-                    <button class="btn btn-warning">Editar</button>
-                    <button class="btn btn-danger">Eliminar</button>
+                    <a class="btn btn-warning" href="edit.jsp?id=${proveedor.id}">Editar</a>
+                    <form action="ProviderServlet" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="id" value="${proveedor.id}">
+                        <input class="btn btn-danger" type="submit" value="Eliminar">
+                    </form>
                 </td>
             </tr>
         </c:forEach>

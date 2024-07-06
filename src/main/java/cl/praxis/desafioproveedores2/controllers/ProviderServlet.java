@@ -1,6 +1,9 @@
 package cl.praxis.desafioproveedores2.controllers;
 
 
+import cl.praxis.desafioproveedores2.models.ProviderDTO;
+import cl.praxis.desafioproveedores2.service.ProviderService;
+import cl.praxis.desafioproveedores2.service.impl.ProviderServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,10 +11,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name="proveedores", value = "/")
 public class ProviderServlet extends HttpServlet {
 
+    ProviderService provider = new ProviderServiceImpl();
 
     @Override
     public void init() throws ServletException {
@@ -19,7 +24,9 @@ public class ProviderServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //recuperar desde el servicio la lista de los proveedores
-
+        List<ProviderDTO> listProviders = provider.selectAllProviders();
+        System.out.println(listProviders);
+        request.setAttribute("listProviders", listProviders);
         //mostrar la lista
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
