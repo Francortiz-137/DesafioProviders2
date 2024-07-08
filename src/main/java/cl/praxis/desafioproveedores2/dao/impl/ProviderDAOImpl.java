@@ -50,8 +50,26 @@ public class ProviderDAOImpl implements ProviderDAO {
     }
 
     @Override
-    public ProviderDTO insertProvider(ProviderDTO user) {
-        return null;
+    public ProviderDTO insertProvider(ProviderDTO provider) {
+        ProviderDTO newProvider = new ProviderDTO();
+        try(PreparedStatement preparedStatement = MySQLConnection.getInstance().getConnection().prepareStatement(INSERT_USER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setString(1, provider.getName());
+            preparedStatement.setString(2, provider.getRut());
+            preparedStatement.setString(3, provider.getEmail());
+            preparedStatement.setString(4, provider.getAddress());
+            preparedStatement.setString(5, provider.getPhone());
+            preparedStatement.setString(6, provider.getContact());
+            preparedStatement.setString(7, provider.getContactPhone());
+            preparedStatement.executeUpdate();
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if(rs.next()){
+                int id = rs.getInt(1);
+                newProvider = new ProviderDTO(id, provider.getName(), provider.getRut(), provider.getEmail(), provider.getAddress(), provider.getPhone(), provider.getContact(), provider.getContactPhone());
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return newProvider;
     }
 
     @Override

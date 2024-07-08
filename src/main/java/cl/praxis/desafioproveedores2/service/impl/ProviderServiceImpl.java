@@ -26,12 +26,12 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public ProviderDTO insertProvider(ProviderDTO user) {
-        return null;
+    public ProviderDTO insertProvider(ProviderDTO provider) {
+        return dao.insertProvider(provider);
     }
 
     @Override
-    public ProviderDTO updateProvider(ProviderDTO user) {
+    public ProviderDTO updateProvider(ProviderDTO provider) {
         return null;
     }
 

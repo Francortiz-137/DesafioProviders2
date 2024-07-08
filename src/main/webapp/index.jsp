@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Proveedores</title>
+    <title>Proveedores</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
@@ -15,7 +15,7 @@
 
 <section class="container d-flex">
 
-    <form method="post" action="proveedores">
+    <form method="post" action="providers?action=insert">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -73,12 +73,8 @@
                 <td>${proveedor.contact}</td>
                 <td>${proveedor.contactPhone}</td>
                 <td>
-                    <a class="btn btn-warning" href="edit.jsp?id=${proveedor.id}">Editar</a>
-                    <form action="ProviderServlet" method="post" style="display:inline;">
-                        <input type="hidden" name="_method" value="delete">
-                        <input type="hidden" name="id" value="${proveedor.id}">
-                        <input class="btn btn-danger" type="submit" value="Eliminar">
-                    </form>
+                    <a class="btn btn-warning" href="providers?action=edit&id=${proveedor.id}">Editar</a>
+                    <a class="btn btn-danger" href="providers?action=delete&id=${provider.id}" onclick="return confirm('Are you sure?')">Eliminar</a>
                 </td>
             </tr>
         </c:forEach>

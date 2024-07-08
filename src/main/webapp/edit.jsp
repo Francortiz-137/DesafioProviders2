@@ -15,39 +15,42 @@
 </head>
 <body>
 
-<h1>Editar Campos</h1>
+<h1 class="text-center">Editar Campos</h1>
 
-<form method="post" action="proveedores">
-    <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" required>
-    </div>
-    <div class="mb-3">
-        <label for="rut" class="form-label">RUT</label>
-        <input type="text" class="form-control" id="rut" name="rut" required>
-    </div>
-    <div class="mb-3">
-        <label for="direccion" class="form-label">Dirección</label>
-        <input type="text" class="form-control" id="direccion" name="direccion" required>
-    </div>
-    <div class="mb-3">
-        <label for="correo" class="form-label">Correo Electrónico</label>
-        <input type="email" class="form-control" id="correo" name="correo" required>
-    </div>
-    <div class="mb-3">
-        <label for="telefono" class="form-label">Teléfono</label>
-        <input type="text" class="form-control" id="telefono" name="telefono">
-    </div>
-    <div class="mb-3">
-        <label for="contacto" class="form-label">Contacto</label>
-        <input type="text" class="form-control" id="contacto" name="contacto">
-    </div>
-    <div class="mb-3">
-        <label for="telefono_contacto" class="form-label">Teléfono de Contacto</label>
-        <input type="text" class="form-control" id="telefono_contacto" name="telefono_contacto">
-    </div>
-    <button type="submit" class="btn btn-primary">Editar</button>
-</form>
+<section class="container">
+    <h2>${provider}</h2>
+    <form method="post" action="providers?action=update">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <div class="mb-3">
+            <label for="rut" class="form-label">RUT</label>
+            <input type="text" class="form-control" id="rut" name="rut" required>
+        </div>
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" required>
+        </div>
+        <div class="mb-3">
+            <label for="correo" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="correo" name="correo" required>
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono">
+        </div>
+        <div class="mb-3">
+            <label for="contacto" class="form-label">Contacto</label>
+            <input type="text" class="form-control" id="contacto" name="contacto">
+        </div>
+        <div class="mb-3">
+            <label for="telefono_contacto" class="form-label">Teléfono de Contacto</label>
+            <input type="text" class="form-control" id="telefono_contacto" name="telefono_contacto">
+        </div>
+        <button type="submit" class="btn btn-primary">Editar</button>
+    </form>
+</section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
