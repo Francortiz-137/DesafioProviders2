@@ -5,6 +5,7 @@ import cl.praxis.desafioproveedores2.dao.impl.ProviderDAOImpl;
 import cl.praxis.desafioproveedores2.models.ProviderDTO;
 import cl.praxis.desafioproveedores2.service.ProviderService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProviderServiceImpl implements ProviderService {
@@ -16,8 +17,8 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public ProviderDTO selectProviderById(int id) {
-        return null;
+    public ProviderDTO selectProviderById(int id) throws SQLException {
+        return dao.selectProviderById(id);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class ProviderServiceImpl implements ProviderService {
 
     @Override
     public ProviderDTO updateProvider(ProviderDTO provider) {
-        return null;
+        return dao.updateProvider(provider);
     }
 
     @Override

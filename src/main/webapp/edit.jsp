@@ -18,35 +18,35 @@
 <h1 class="text-center">Editar Campos</h1>
 
 <section class="container">
-    <h2>${provider}</h2>
     <form method="post" action="providers?action=update">
+        <input type="hidden" name="id" value="${provider.id}">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="${provider.name}" required>
         </div>
         <div class="mb-3">
             <label for="rut" class="form-label">RUT</label>
-            <input type="text" class="form-control" id="rut" name="rut" required>
+            <input type="text" class="form-control" id="rut" name="rut" value="${provider.rut}" required>
         </div>
         <div class="mb-3">
             <label for="direccion" class="form-label">Dirección</label>
-            <input type="text" class="form-control" id="direccion" name="direccion" required>
+            <input type="text" class="form-control" id="direccion" name="direccion" value="${provider.address}" required>
         </div>
         <div class="mb-3">
             <label for="correo" class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" id="correo" name="correo" required>
+            <input type="email" class="form-control" id="correo" name="correo" value="${provider.email}" required>
         </div>
         <div class="mb-3">
             <label for="telefono" class="form-label">Teléfono</label>
-            <input type="text" class="form-control" id="telefono" name="telefono">
+            <input type="text" class="form-control" id="telefono" name="telefono" value="${provider.phone}">
         </div>
         <div class="mb-3">
             <label for="contacto" class="form-label">Contacto</label>
-            <input type="text" class="form-control" id="contacto" name="contacto">
+            <input type="text" class="form-control" id="contacto" name="contacto" value="${provider.contact}">
         </div>
         <div class="mb-3">
             <label for="telefono_contacto" class="form-label">Teléfono de Contacto</label>
-            <input type="text" class="form-control" id="telefono_contacto" name="telefono_contacto">
+            <input type="text" class="form-control" id="telefono_contacto" name="telefono_contacto" value="${provider.contactPhone}">
         </div>
         <button type="submit" class="btn btn-primary">Editar</button>
     </form>

@@ -2,10 +2,11 @@ package cl.praxis.desafioproveedores2.service;
 
 import cl.praxis.desafioproveedores2.models.ProviderDTO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ProviderService {
-    public ProviderDTO selectProviderById(int id);
+    public ProviderDTO selectProviderById(int id) throws SQLException;
 
     public List<ProviderDTO> selectAllProviders();
 

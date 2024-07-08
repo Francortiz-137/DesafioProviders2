@@ -82,10 +82,6 @@ public class ProviderServlet extends HttpServlet {
         ProviderDTO newProvider = new ProviderDTO(name, rut, address, email, phone, contact, contactPhone);
         providerService.insertProvider(newProvider);
 
-
-        System.out.println("...");
-        System.out.println(newProvider);
-        System.out.println("...");
         //Cargar la vista con todos los providers
         response.sendRedirect("providers");
     }
@@ -103,7 +99,7 @@ public class ProviderServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         ProviderDTO existingProvider = providerService.selectProviderById(id);
-        request.setAttribute("providers", existingProvider);
+        request.setAttribute("provider", existingProvider);
         request.getRequestDispatcher("edit.jsp").forward(request, response);
     }
 
@@ -118,8 +114,9 @@ public class ProviderServlet extends HttpServlet {
         String phone = request.getParameter("telefono");
         String contact = request.getParameter("contacto");
         String contactPhone = request.getParameter("telefono_contacto");
-        ProviderDTO user = new ProviderDTO(name, rut, address, email, phone, contact, contactPhone);
-        providerService.updateProvider(user);
+        ProviderDTO provider = new ProviderDTO(id, name, rut, address, email, phone, contact, contactPhone);
+        System.out.println("Actualizando usuario: " + provider);
+        providerService.updateProvider(provider);
         response.sendRedirect("providers");
     }
 
@@ -129,15 +126,15 @@ public class ProviderServlet extends HttpServlet {
         System.out.println(listProviders);
         request.setAttribute("listProviders", listProviders);
         //mostrar la lista
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("providers.jsp").forward(request, response);
     }
 
     // Método para ver los detalles de un usuario
     private void viewProvider(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
         ProviderDTO provider = providerService.selectProviderById(id);
         request.setAttribute("provider", provider);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("providers.jsp").forward(request, response);
     }
 }

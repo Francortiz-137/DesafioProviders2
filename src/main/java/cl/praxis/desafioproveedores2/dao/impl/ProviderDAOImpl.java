@@ -16,14 +16,30 @@ public class ProviderDAOImpl implements ProviderDAO {
     private static final String SELECT_ALL_USERS = "SELECT id, nombre, rut, direccion, correo, telefono, contacto, telefono_contacto FROM proveedores";
     private static final String SELECT_USER_BY_ID = "SELECT id, nombre, rut, direccion, correo, telefono, contacto, telefono_contacto FROM proveedores WHERE id = ?";
     private static final String INSERT_USER_SQL = "INSERT INTO proveedores (nombre, rut, direccion, correo, telefono, contacto, telefono_contacto) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_USER_SQL = "UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, edad = ? WHERE idusuario = ?";
+    private static final String UPDATE_USER_SQL = "UPDATE proveedores SET nombre = ?, rut = ?, direccion = ?, correo = ?, telefono = ?, contacto = ?, telefono_contacto = ? WHERE id = ?";
     private static final String DELETE_USER_SQL = "DELETE FROM usuarios WHERE idusuario = ?";
-
-
 
     @Override
     public ProviderDTO selectProviderById(int id) throws SQLException {
-        return null;
+        ProviderDTO provider = null;
+        try (Connection connection = MySQLConnection.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)){
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString("nombre");
+                String rut = rs.getString("rut");
+                String email = rs.getString("correo");
+                String address = rs.getString("direccion");
+                String phone = rs.getString("telefono");
+                String contact = rs.getString("contacto");
+                String contactPhone = rs.getString("telefono_contacto");
+                provider = new ProviderDTO(id, name, rut, address, email, phone, contact, contactPhone);
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return provider;
     }
 
     @Override
@@ -41,7 +57,7 @@ public class ProviderDAOImpl implements ProviderDAO {
                 String phone = rs.getString("telefono");
                 String contact = rs.getString("contacto");
                 String contactPhone = rs.getString("telefono_contacto");
-                users.add(new ProviderDTO(id, name, rut, email, address, phone, contact, contactPhone));
+                users.add(new ProviderDTO(id, name, rut, address, email, phone, contact, contactPhone));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -55,8 +71,8 @@ public class ProviderDAOImpl implements ProviderDAO {
         try(PreparedStatement preparedStatement = MySQLConnection.getInstance().getConnection().prepareStatement(INSERT_USER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1, provider.getName());
             preparedStatement.setString(2, provider.getRut());
-            preparedStatement.setString(3, provider.getEmail());
-            preparedStatement.setString(4, provider.getAddress());
+            preparedStatement.setString(3, provider.getAddress());
+            preparedStatement.setString(4, provider.getEmail());
             preparedStatement.setString(5, provider.getPhone());
             preparedStatement.setString(6, provider.getContact());
             preparedStatement.setString(7, provider.getContactPhone());
@@ -73,8 +89,22 @@ public class ProviderDAOImpl implements ProviderDAO {
     }
 
     @Override
-    public ProviderDTO updateProvider(ProviderDTO user) {
-        return null;
+    public ProviderDTO updateProvider(ProviderDTO provider) {
+        try (Connection connection = MySQLConnection.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_SQL)) {
+            preparedStatement.setString(1, provider.getName());
+            preparedStatement.setString(2, provider.getRut());
+            preparedStatement.setString(3, provider.getAddress());
+            preparedStatement.setString(4, provider.getEmail());
+            preparedStatement.setString(5, provider.getPhone());
+            preparedStatement.setString(6, provider.getContact());
+            preparedStatement.setString(7, provider.getContactPhone());
+            preparedStatement.setInt(8, provider.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return provider;
     }
 
     @Override
