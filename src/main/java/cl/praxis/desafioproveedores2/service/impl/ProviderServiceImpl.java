@@ -38,6 +38,6 @@ public class ProviderServiceImpl implements ProviderService {
 
     @Override
     public void deleteProvider(int id) {
-
+        dao.deleteProvider(id);
     }
 }

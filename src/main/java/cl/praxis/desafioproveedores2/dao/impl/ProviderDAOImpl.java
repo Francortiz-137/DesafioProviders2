@@ -17,7 +17,7 @@ public class ProviderDAOImpl implements ProviderDAO {
     private static final String SELECT_USER_BY_ID = "SELECT id, nombre, rut, direccion, correo, telefono, contacto, telefono_contacto FROM proveedores WHERE id = ?";
     private static final String INSERT_USER_SQL = "INSERT INTO proveedores (nombre, rut, direccion, correo, telefono, contacto, telefono_contacto) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_USER_SQL = "UPDATE proveedores SET nombre = ?, rut = ?, direccion = ?, correo = ?, telefono = ?, contacto = ?, telefono_contacto = ? WHERE id = ?";
-    private static final String DELETE_USER_SQL = "DELETE FROM usuarios WHERE idusuario = ?";
+    private static final String DELETE_USER_SQL = "DELETE FROM proveedores WHERE id = ?";
 
     @Override
     public ProviderDTO selectProviderById(int id) throws SQLException {
@@ -109,6 +109,12 @@ public class ProviderDAOImpl implements ProviderDAO {
 
     @Override
     public void deleteProvider(int id) {
-
+        try (Connection connection = MySQLConnection.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER_SQL)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

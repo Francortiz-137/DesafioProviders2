@@ -5,12 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proveedores</title>
+    <title>proveedores</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
 <body>
-<h1 class="text-center">Proveedores</h1>
+<h1 class="text-center">proveedores</h1>
 <br/>
 
 <section class="container d-flex">
@@ -62,18 +62,18 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="proveedor" items="${listProviders}">
+        <c:forEach var="provider" items="${listProviders}">
             <tr>
-                <td>${proveedor.id}</td>
-                <td>${proveedor.name}</td>
-                <td>${proveedor.rut}</td>
-                <td>${proveedor.address}</td>
-                <td>${proveedor.email}</td>
-                <td>${proveedor.phone}</td>
-                <td>${proveedor.contact}</td>
-                <td>${proveedor.contactPhone}</td>
+                <td>${provider.id}</td>
+                <td>${provider.name}</td>
+                <td>${provider.rut}</td>
+                <td>${provider.address}</td>
+                <td>${provider.email}</td>
+                <td>${provider.phone}</td>
+                <td>${provider.contact}</td>
+                <td>${provider.contactPhone}</td>
                 <td>
-                    <a class="btn btn-warning" href="providers?action=edit&id=${proveedor.id}">Editar</a>
+                    <a class="btn btn-warning" href="providers?action=edit&id=${provider.id}">Editar</a>
                     <a class="btn btn-danger" href="providers?action=delete&id=${provider.id}" onclick="return confirm('Are you sure?')">Eliminar</a>
                 </td>
             </tr>
